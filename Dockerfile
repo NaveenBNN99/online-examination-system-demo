@@ -1,19 +1,16 @@
-# Use an official OpenJDK image that includes the JDK
-FROM openjdk:11-jdk-slim
+# Use an OpenJDK base image
+FROM openjdk:11-jre-slim
 
-# Set the working directory to /app
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the Gradle Wrapper files into the container at /app
-COPY gradlew .
-COPY gradle gradle
+# Copy the JAR file from the build context into the container
+COPY build/libs/OnlineExaminationSystem-0.0.1-SNAPSHOT.jar /app/
 
-# Copy the rest of your application code
-COPY . .
+# Expose the port your application runs on
+EXPOSE 8082
 
-# Run the Gradle build
-RUN chmod +x gradlew && ./gradlew build
-
-# Specify the command to run your application (if applicable)
+# Command to run the application
 CMD ["java", "-jar", "OnlineExaminationSystem-0.0.1-SNAPSHOT.jar"]
+
 
