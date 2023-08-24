@@ -1,7 +1,15 @@
-FROM adoptopenjdk:11-jre-hotspot
+# Use an OpenJDK base image
+FROM openjdk:11-jre-slim
+
+# Set the working directory in the container
 WORKDIR /app
-COPY build/libs/*.jar app.jar
-EXPOSE 8080
-CMD ["java", "-jar", "app.jar"]
-#3
+
+# Copy the JAR file from the build context into the container
+COPY build/libs/OnlineExaminationSystem-0.0.1-SNAPSHOT.jar /app/
+
+# Expose the port your application runs on
+EXPOSE 8082
+
+# Command to run the application
+CMD ["java", "-jar", "OnlineExaminationSystem-0.0.1-SNAPSHOT.jar"]
 
